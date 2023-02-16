@@ -71,7 +71,8 @@
           <div class="modal-content border-0">
             <div class="modal-header bg-dark text-white">
               <h5 id="productModalLabel" class="modal-title">
-                <span>新增產品</span>
+                <span v-if="isNew">新增產品</span>
+                <span v-else>編輯產品</span>
               </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -96,12 +97,22 @@
                         </template>
 
                         <!--判斷刪除/新增出現的時機-->
-                        <button v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length-1]" @click="tempProduct.imagesUrl.push('')" class="btn btn-outline-primary btn-sm d-block w-100">
+                        <div v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length-1]">
+                          <button  @click="tempProduct.imagesUrl.push('')" class="btn btn-outline-primary btn-sm d-block w-100">
                             新增圖片
-                        </button>
-                        <button v-else @click="tempProduct.imagesUrl.pop('')" class="btn btn-outline-danger btn-sm d-block w-100">
+                          </button>
+                        </div>
+                        <div v-else>
+                          <button v-else @click="tempProduct.imagesUrl.pop('')" class="btn btn-outline-danger btn-sm d-block w-100">
                             刪除圖片
-                        </button>
+                         </button>
+                        </div>
+
+                    </div>
+                    <div v-else>
+                      <button class="btn btn-outline-primary btn-sm d-block w-100" @click="createImages">
+                        新增圖片
+                      </button>
                     </div>
 
                   </div>

@@ -2,7 +2,6 @@
 import{createApp} from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.esm-browser.min.js"
 
 const url = 'https://vue3-course-api.hexschool.io/v2'; 
-const path = 'mjweek2';
 
 const app={
     //資料
@@ -40,8 +39,6 @@ const app={
         }
 
     },
-    mounted(){
-    }
 
 
 };

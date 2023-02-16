@@ -31,7 +31,7 @@ const app={
           console.log(this.products);
         })
         .catch((err)=>{
-          console.log(err.data);
+          alert(err.data.message);
         })
       },
 
@@ -51,12 +51,14 @@ const app={
         .then((res)=>{
             //重新取得產品列表
             this.getProducts();
+            alert(`新增產品成功`)
+
 
             //更新完關閉model
             productModal.hide();
         })
         .catch((err)=>{
-          console.log(err.data);
+          alert(err.data.message);
         })
       },
 
@@ -68,6 +70,7 @@ const app={
             this.tempProduct={
                 imagesUrl:[],
             }
+
 
         } else if(status==="edit"){
             productModal.show();
@@ -87,12 +90,18 @@ const app={
         axios.delete(`${url}/api/${path}/admin/product/${this.tempProduct.id}`)
         .then((res)=>{
           this.getProducts();
+          alert(`刪除成功`)
           delProductModal.hide();//openModel有打開，在此關閉
         })
         .catch((err)=>{
-          console.log(err.data);
+          alert(err.data.message);
         })
-      }
+      },
+
+      createImages() {
+        this.tempProduct.imagesUrl = [];
+        this.tempProduct.imagesUrl.push('');
+      },
 
     },
 
@@ -104,8 +113,6 @@ const app={
       axios.defaults.headers.common['Authorization'] = token;
       this.getProducts();
 
-      //Bootstrap方法
-      console.log(bootstrap);
 
       //先初始化new
       productModal = new bootstrap.Modal("#productModal");
